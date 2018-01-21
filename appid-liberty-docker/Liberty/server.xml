@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="new server">
+    <!-- Enable features -->
+    <featureManager>
+        <feature>ssl-1.0</feature>
+        <feature>servlet-3.1</feature>
+        <feature>appSecurity-2.0</feature>
+        <feature>openidConnectClient-1.0</feature>
+    </featureManager>
+
+    <openidConnectClient id="MyRP"
+                         clientId= "${APPID_CLIENT_ID}"
+                         clientSecret= "${APPID_CLIENT_SECRET}"
+                         authorizationEndpointUrl="${APPID_AUTH_SERVER}/authorization"
+                         tokenEndpointUrl="${APPID_AUTH_SERVER}/token"
+                         jwkEndpointUrl="${APPID_AUTH_SERVER}/publickeys"
+                         issuerIdentifier="${APPID_AUTH_SERVER_ISSUER}"
+                         tokenEndpointAuthMethod="basic"
+                         signatureAlgorithm="RS256"
+                         authFilterid="myAuthFilter"
+                         trustAliasName="ng.bluemix.net"
+                         trustStoreRef="appidtruststore"
+                         redirectToRPHostAndPort="https://${env.APPID_SAMPLE_HOST}:${env.APPID_SAMPLE_SSL_PORT}"
+    />
+    <authFilter id="myAuthFilter">
+        <requestUrl id="myRequestUrl" urlPattern="/ProtectedServlet" matchType="contains"/>
+    </authFilter>
+    <keyStore id="defaultKeyStore" password="myPassword"/>
+    <keyStore id="appidtruststore" password="Liberty" location="${server.config.dir}/resources/security/mytruststore.jks"/>
+
+    <ssl id="defaultSSLConfig" keyStoreRef="defaultKeyStore" trustStoreRef="appidtruststore"/>
+
+            <application type="war" id="ProtectedServlet" context-root="/appidSample" location="${server.config.dir}/apps/libertySample-1.0.0.war">
+            <application-bnd>
+                <security-role name="myrole">
+                <special-subject type="ALL_AUTHENTICATED_USERS" />
+                </security-role>
+                    </application-bnd>
+                </application>
+
+    <applicationManager autoExpand="true"/>
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint id="defaultHttpEndpoint"
+                  httpPort="9080"
+                  host="*"
+                  httpsPort="9443" />
+</server>
