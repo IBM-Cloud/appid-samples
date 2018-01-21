@@ -36,39 +36,38 @@ The output would be `export KUBECONFIG=...`. Copy and paste it at your terminal 
 3. Replace the variables in the following commands with the values appropriate for your app and execute them in terminal.
 	- Set a value to region where you want to create the App ID instance at. This should match the region you used when creating the cluster and repository namespace. Call `bx regions` for a list of available regions and set the selected name:
 
-	 ```
-	REGION=<region name, e.g. us-south>
+     ```
+	    REGION=<region name, e.g. us-south>  
 	 ```
 
 	- Set the domain for your containers registry, according to the region you selected. See:  [registry regions](https://console.bluemix.net/docs/services/Registry/registry_overview.html#registry_regions) for available registries domains
 
 	 ```
-	REGISTRY_DOMAIN=<registry domain, e.g. registry.ng.bluemix.net>
+	 REGISTRY_DOMAIN=<registry domain, e.g. registry.ng.bluemix.net>  
 	 ```
-
-	- Set you repository namespace. Call `bx cr namespaces` for a list of available namesapces
-
-		```
-	REPOSITORY_NAMESPACE=<your repository namespace>
-		```
+	   
+	- Set you repository namespace. Call `bx cr namespaces` for a list of available namesapces  
+	    
+	  ```
+	  REPOSITORY_NAMESPACE=<your repository namespace>
+	  ```
 
 	- Set the name of your app ID instance
-
-	 	```
-		APPID_INSTANCE_NAME=<your choice of an App ID instance name>
+        ```
+        APPID_INSTANCE_NAME=<your choice of an App ID instance name>  
 		```
 
 
 4. Create an instance of App ID.
 
-	CF (this is what currently supported):
+	<!--CF (this is what currently supported):-->
 	```
 	bx service create appid "Graduated tier" $APPID_INSTANCE_NAME
 	```
-	RC (will start using this command once App ID is RC compatible in production):
+	<!--RC (will start using this command once App ID is RC compatible in production):
 	```
 	bx resource service-instance-create $APPID_INSTANCE_NAME appid graduated-tier $REGION
-	```
+	``` -->
 5. *Optional*: Configure your App ID preferences. In the output of the following command, click on the Dashboard URL.
 
 	```
@@ -91,7 +90,6 @@ The output would be `export KUBECONFIG=...`. Copy and paste it at your terminal 
 Optionally, prior to pushing the sample to Kubernetes, you might want to try out running on Docker locally. When you are developing this helps you try code quickly.
 
 1. To run locally, you need to get the App ID service instance credentials. You can get the credentials by doing one of the following:
-
 
 	* Go to the **Service Credentials** tab of your instance dashboard.
 	* You can decode your Kubernetes secret which you get as Base64 encoded when calling:
