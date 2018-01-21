@@ -78,7 +78,14 @@ The output would be `export KUBECONFIG=...`. Copy and paste it at your terminal 
 	```
 	bx cs cluster-service-bind $CLUSTER_NAME default $APPID_INSTANCE_NAME
 	```
-7. Download and extract the sample app: **appid-liberty-sample.zip**
+7. Get the sample source from github repository [appid-samples](https://github.com/IBM-Cloud/appid-samples) or clone it: 
+    ```
+    git clone git@github.com:IBM-Cloud/appid-samples.git
+    ```
+    then go into the appid-liberty-docker folder
+    ```
+    cd appid-liberty-docker
+    ```
 8. Change directories so that you're in the folder in which you extracted the sample and run:
 
 	```
