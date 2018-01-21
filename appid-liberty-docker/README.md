@@ -36,21 +36,21 @@ The output would be `export KUBECONFIG=...`. Copy and paste it at your terminal 
 3. Replace the variables in the following commands with the values appropriate for your app and execute them in terminal.
 	- Set a value to region where you want to create the App ID instance at. This should match the region you used when creating the cluster and repository namespace. Call `bx regions` for a list of available regions and set the selected name:
 
-     ```
+        ```
 	    REGION=<region name, e.g. us-south>  
-	 ```
+	    ```
 
 	- Set the domain for your containers registry, according to the region you selected. See:  [registry regions](https://console.bluemix.net/docs/services/Registry/registry_overview.html#registry_regions) for available registries domains
 
-	 ```
-	 REGISTRY_DOMAIN=<registry domain, e.g. registry.ng.bluemix.net>  
-	 ```
+        ```
+        REGISTRY_DOMAIN=<registry domain, e.g. registry.ng.bluemix.net>  
+        ```
 	   
 	- Set you repository namespace. Call `bx cr namespaces` for a list of available namesapces  
 	    
-	  ```
-	  REPOSITORY_NAMESPACE=<your repository namespace>
-	  ```
+	    ```
+	    REPOSITORY_NAMESPACE=<your repository namespace>
+	    ```
 
 	- Set the name of your app ID instance
         ```
