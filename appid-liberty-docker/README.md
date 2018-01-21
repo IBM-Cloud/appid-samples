@@ -122,7 +122,7 @@ Optionally, prior to pushing the sample to Kubernetes, you might want to try out
 To see the sample running go to: [http://localhost/appidSample](http://localhost/appidSample).
 
 You will see a page similar to the following in your browser:
-![](welcomePage.jpg)
+![](img/welcomePage.jpg)
 
 Your sample app is now configured to allow login with an identity provider, get a token from App ID's authorization endpoint, and use it to access the sample's *ProtectedServlet*.
 
