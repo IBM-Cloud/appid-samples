@@ -1,6 +1,7 @@
-# Securing WebSphere Liberty apps running in Kubernetes with App ID
+# Using App ID to secure Docker and Kubernetes applications
 
-So, you have a server side Java application and you need to be able to authenticate your users without the hassle? Then [App ID](https://www.ibm.com/blogs/bluemix/2017/03/introducing-ibm-bluemix-app-id-authentication-profiles-service-app-developers/) is for you. There's no easier way to create a scalable app than to use the nimble IBM WebSphere Liberty application server in a Docker image and run it with [IBM Cloud Container Service](/docs/containers/container_index.html#container_index).
+So, you have a server side Java application and you need to be able to authenticate your users without the hassle? Then [App ID](https://www.ibm.com/blogs/bluemix/2017/03/introducing-ibm-bluemix-app-id-authentication-profiles-service-app-developers/) is for you.  
+In this article we will walkthrough the steps to use App ID to secure a Servlet running in an IBM WebSphere Liberty application server installed in a Docker image and then deploy it on the Kubernetes based [IBM Cloud Container Service](/docs/containers/container_index.html#container_index).
 
 
 ## Prerequisites
@@ -14,9 +15,10 @@ Before you can get started, you'll need to complete the following prerequisites.
 
 ## Configuring the sample
 
-You should now have the CLIs installed, a lite cluster, and an image repository namespace in IBM Cloud Container Registry. The following steps assume that you are using the default cluster namespace. Pro tip: Don't confuse the image repository namespace and the cluster namespace. They are different namespaces.
-
-Pro tip: To use a different cluster namespace, add the *--namespace=* parameter to the kubectl commands.
+You should now have the CLIs installed, a lite cluster, and an image repository namespace in IBM Cloud Container Registry. The following steps assume that you are using the default cluster namespace.  
+  
+**Pro tip**: Don't confuse the image repository namespace and the cluster namespace. They are different namespaces.  
+**Pro tip**: To use a different cluster namespace, add the *--namespace=* parameter to the kubectl commands.
 
 
 1. In your terminal, log in to IBM Cloud.
@@ -31,7 +33,7 @@ Pro tip: To use a different cluster namespace, add the *--namespace=* parameter 
 	CLUSTER_NAME=<your Kubernetes cluster name>
 	bx cs cluster-config $CLUSTER_NAME
 	```
-The output would be `export KUBECONFIG=...`. Copy and paste it at your terminal to set this variable to your env.
+    The output would be `export KUBECONFIG=...`. Copy and paste it at your terminal to set this variable to your env.
 
 3. Replace the variables in the following commands with the values appropriate for your app and execute them in terminal.
 	- Set a value to region where you want to create the App ID instance at. This should match the region you used when creating the cluster and repository namespace. Call `bx regions` for a list of available regions and set the selected name:
@@ -106,9 +108,10 @@ Optionally, prior to pushing the sample to Kubernetes, you might want to try out
 
 	 I have [jq](https://stedolan.github.io/jq/) installed locally so I used it to decode the value this way:
 				```
-				BINDING=$(kubectl get secret binding-$APPID_INSTANCE_NAME -o json | jq .data -r | jq .binding -r | base64 --decode)
-				```
-				**Pro tip**: This step eventually replaces the `APPID_AUTH_SERVER`, `APPID_CLIENT_ID`, `APPID_CLIENT_SECRET` and `APPID_AUTH_SERVER_ISSUER` values in your *Liberty/server.xml* with values that we append at runtime to the server *Liberty/bootstrap.properties* file. You can replace them manually, just don't pass the `--build-arg binding_secret=$BINDING` argument to the command below.
+				BINDING=$(kubectl get secret binding-$APPID_INSTANCE_NAME -o json | jq .data -r | jq .binding -r | base64 --decode)    
+				```  
+				
+	 **Pro tip**: This step eventually replaces the `APPID_AUTH_SERVER`, `APPID_CLIENT_ID`, `APPID_CLIENT_SECRET` and `APPID_AUTH_SERVER_ISSUER` values in your *Liberty/server.xml* with values that we append at runtime to the server *Liberty/bootstrap.properties* file. You can replace them manually, just don't pass the `--build-arg binding_secret=$BINDING` argument to the command below.
 
 2. Run the following command to build and run the image.
 
@@ -121,7 +124,7 @@ Optionally, prior to pushing the sample to Kubernetes, you might want to try out
 
 To see the sample running go to: [http://localhost/appidSample](http://localhost/appidSample).
 
-You will see a page similar to the following in your browser:
+You will see a page similar to the following in your browser:  
 ![](img/welcomePage.jpg)
 
 Your sample app is now configured to allow login with an identity provider, get a token from App ID's authorization endpoint, and use it to access the sample's *ProtectedServlet*.
