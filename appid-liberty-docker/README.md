@@ -1,8 +1,8 @@
 # Using App ID to secure Docker and Kubernetes applications
 
 So, you have a server side Java application and you need to be able to authenticate your users without the hassle? Then [App ID](https://www.ibm.com/blogs/bluemix/2017/03/introducing-ibm-bluemix-app-id-authentication-profiles-service-app-developers/) is for you.  
-In this article we will walkthrough the steps to use App ID to secure a Servlet running in an IBM WebSphere Liberty application server installed in a Docker image and then deploy it on the Kubernetes based [IBM Cloud Container Service](/docs/containers/container_index.html#container_index).
-
+In this article we will walkthrough the steps to use App ID to secure a Servlet running in an IBM WebSphere Liberty application server installed in a Docker image and then deploy it on the Kubernetes based [IBM Cloud Container Service](/docs/containers/container_index.html#container_index).  
+We will show how you can bind the container running on IBM cloud to the App ID service instance so that the instance metadata and credentials will be available as Kubernetes secrets. This technique could be used with different types of server side applications.
 
 ## Prerequisites
 
