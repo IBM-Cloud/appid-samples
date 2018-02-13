@@ -1,6 +1,6 @@
 FROM websphere-liberty:webProfile7
 WORKDIR /opt/ibm/wlp/usr/servers/
-COPY Liberty defaultServer/
+COPY liberty defaultServer/
 RUN installUtility install --acceptLicense defaultServer
 ARG clusterIP=localhost
 ARG sslPort=443
