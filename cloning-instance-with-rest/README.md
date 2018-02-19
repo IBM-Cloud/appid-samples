@@ -1,10 +1,10 @@
-#Cloning an App ID instance example
+# Cloning an App ID instance example
 
 Here is an example of how to use the App ID management APIs to create a script that easily 'clone' an instance of App ID.
 The script can be part of the organization DevOps pipeline and specific permissions can be granted just for this task by the IBM Cloud platform. 
 We will demonstrate how the script can get an api-key to authenticate with and get the temporary IAM credentials that will enable it to access App ID APIs and copy the configuration of an existing App ID instance to a newly created instance.
 
-###Initial steps
+### Initial steps
 1. The owner of the account logs in to IBM cloud console and creates a new Service ID. He gives an operator role to all App ID instances and a Viewer role specifically to the instance that should be cloned.  See how [here](https://console.bluemix.net/docs/iam/serviceid.html#serviceids)
 2. The owner will create an access policy to the service that will allow it to perform the cloning task, and will assign the platform role of an Editor and the service role of a Writer to all App ID service in the account. See how [here](https://console.bluemix.net/docs/iam/serviceidaccess.html#serviceidpolicy)
 
@@ -16,7 +16,7 @@ For a detailed walkthrough on how to create and manage service IDs see this good
 
 > Note: For simplicity, this example shows the cloning of an instance in the same account as the source. For cloning from one account to another, you will be creating 2 different service IDs, one in the source account and another in the target account. Then you will set the policies as appropriate so that the source will have read rights and target will have edit rights, and you will need to use the 2 different api-keys you will create in the cloning script. After you will finish this tutorial, we believe it will be a trivial addition for you to implement.
 
-###The cloning script
+### The cloning script
 
 Following are the steps required to create a cloning script.
 
