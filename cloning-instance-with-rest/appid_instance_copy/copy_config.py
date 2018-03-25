@@ -29,18 +29,21 @@ def get_iam_token():
 
 def copy(path, token):
     r = get_from_api(path, token)
-    print(r.status_code)
-    print(r.content)
+    debug(r.status_code)
+    debug(r.content)
     if 200 <= r.status_code < 300:
         print("success! got " + path + " from source")
-
+    else:
+        print("Failed to get " + path + " from source")
     jcontent = r.content
 
     r = put_to_api(path, jcontent, token)
-    print(r.status_code)
-    print(r.text)
+    debug(r.status_code)
+    debug(r.text)
     if 200 <= r.status_code < 300:
         print("success! put to " + path + " at target")
+    else:
+        print("Failed to put to " + path + " at target")
 
 def copyTemplates(token):
     copy("cloud_directory/templates/" + "USER_VERIFICATION", token)
@@ -51,6 +54,10 @@ def copyTemplates(token):
 def copyActions(token):
     copy("cloud_directory/action_url/" + "on_user_verified", token)
     copy("cloud_directory/action_url/" + "on_reset_password", token)
+
+def debug(str):
+    if verbose:
+        print(str)
 
 def main():
     parser = argparse.ArgumentParser(description='Copy configuration from one App ID instance to another')
@@ -69,6 +76,9 @@ def main():
     parser.add_argument('-R', '--target_region', type=str,
                         help='IBM Cloud region for source instance, if different then target')
 
+    parser.add_argument('-v', '--verbose', type=bool, default=False,
+                        help='Run with verbose mode. REST messages content will be displayed')
+
     args = parser.parse_args()
 
     global region
@@ -77,18 +87,19 @@ def main():
     global apiKey
     global iam_url
     global management_url
+    global verbose
 
     src_tenantId = args.source
     trgt_tenantId = args.target
     apiKey = args.apikey
     region = args.region
+    verbose = args.verbose
 
     if region == "us-south":
         region = 'ng'
 
     iam_url = "https://iam." + region
     management_url = "https://appid-management." + region + ".bluemix.net/management/v4/"
-    #management_url = "http://localhost:8080/management/v4/"
 
     token = get_iam_token()
 
