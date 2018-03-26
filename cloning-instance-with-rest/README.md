@@ -7,9 +7,9 @@ We will demonstrate how the script can get an api-key to authenticate with and g
 ### Initial steps
 1. The App ID service instance to copy configuration from will be referred to as the 'source instance'. In the same IBM Cloud account, create a new instance (either from dashboard or using bx CLI) which will be referred to as the 'target instance'  
 
-2. The owner of the account logs in to IBM Cloud console and creates a new Service ID.  See how [here](https://console.bluemix.net/docs/iam/serviceid.html#serviceids)
+2. The owner of the account logs in to IBM Cloud console and creates a new Service ID which represents the cloning task.  See how [here](https://console.bluemix.net/docs/iam/serviceid.html#serviceids)
 
-2. The owner will create an access policy to the App ID service with the service role of a `Writer` to all App ID services in the account. See how [here](https://console.bluemix.net/docs/iam/serviceidaccess.html#serviceidpolicy)
+2. It is always the best practice to give the service only the minimal access rights required for the task. The owner will create an access policy to the App ID service with the service role of a `Reader` to the source instance and another policy of a `Writer` to the target instance. See how [here](https://console.bluemix.net/docs/iam/serviceidaccess.html#serviceidpolicy)
 
 	You can read more about App ID actions and roles at [this article](https://console.stage1.bluemix.net/docs/services/appid/iam.html#service-access-management)
 
@@ -28,7 +28,7 @@ For a detailed walkthrough on how to create and manage service IDs see this good
 2. Go into the cloning script folder  
 	`cd appid-samples/cloning-instance-with-rest`
 3. Install the script as a command line script  
-  `Sudo python setup.py install`
+  `sudo python setup.py install`
   
 ### Executing the cloning script
 Now that you have the script installed run the following command in terminal:
