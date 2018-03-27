@@ -31,9 +31,9 @@ In this blog, we will walk you through using a script to obtain an API-key, and 
 
 ## Assigning access policies
 
-2. Create an access policy in the source instance by assigning a user the service role of `Reader`.
+2. Create an access policy in the source instance by assigning the service ID the service role of `Reader`.
 
-		>Tip: Be sure that you only give a user the rights to complete the tasks that they are assigned. If you give to little, you'll need to adjust it for them to do their job. If you give too much, they may affect more than they intend to. To learn more about App ID actions and roles, check out our doc on [service access management](https://console.bluemix.net/docs/iam/serviceidaccess.html#serviceidpolicy).
+		>Tip: Be sure that you only give the service ID the rights to complete the tasks that you want it to. If you give too much, the ID has the ability to affect more than you intend. To learn more about App ID actions and roles, check out our doc on [service access management](https://console.bluemix.net/docs/iam/serviceidaccess.html#serviceidpolicy).
 
 3. In the target instance, assign another policy of `writer` for the same person.
 
@@ -60,7 +60,7 @@ Working with the CLI, complete the following steps.
 1. Review the configurable parameters.
 2. Run the following command to start the script.
 	```
-	appidc <source_id> <target_id> -apikey <api_key> -region <source_region> -target_region <target_region>
+	appidc <source_id> <target_id> --apikey <api_key> --region <source_region> --target_region <target_region>
 	```
 
 <table>
@@ -82,11 +82,11 @@ Working with the CLI, complete the following steps.
 	</tr>
 	<tr>
 		<td><i>source_region</i></td>
-		<td>The region that the instance of App ID that you want to clone is located in.</td>
+		<td>The region that the instance of App ID that you want to clone is located in. If not provided, the default is US-South.</td>
 	</tr>
 	<tr>
 		<td><i>target_region</i></td>
-		<td>The region that the instance of App ID that you want to copy the configuration to is located in.</td>
+		<td>The region that the instance of App ID that you want to copy the configuration to is located in. If not provided, it will default to the source region.</td>
 	</tr>
 </table>
 
@@ -97,7 +97,7 @@ So, say you have App ID instance, x, that you have configured exactly as you wan
 
 Example: 
 ```
-appidc xxxxxxx yyyyyyy -apikey KkKkKkKkkKkKkKkKk -region eu-gb
+appidc xxxxxxx yyyyyyy --apikey KkKkKkKkkKkKkKkKk --region eu-gb
 ```
 
 And that's it! 
