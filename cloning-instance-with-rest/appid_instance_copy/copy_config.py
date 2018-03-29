@@ -7,14 +7,14 @@ import argparse
 
 def get_from_api(path, token):
     headers = {'Authorization': token, 'Accept': 'application/json'}
-    url = management_url + src_tenantId + "/config/" +path
+    url = src_management_url + src_tenantId + "/config/" +path
     return requests.get(
         url,
         headers=headers);
 
 def put_to_api(path, content, token):
     headers = {'Authorization': token, 'Accept': 'application/json', 'Content-Type': 'application/json'}
-    url = management_url + trgt_tenantId + "/config/" + path
+    url = tgt_management_url + trgt_tenantId + "/config/" + path
     return requests.put(
         url,
         data=content,
@@ -86,21 +86,32 @@ def main():
     global trgt_tenantId
     global apiKey
     global iam_url
-    global management_url
+    global src_management_url
+    global tgt_management_url
     global verbose
 
     src_tenantId = args.source
     trgt_tenantId = args.target
     apiKey = args.apikey
     region = args.region
+    tgt_region = args.target_region
     verbose = args.verbose
 
     if region == "us-south":
         region = 'ng'
 
-    iam_url = "https://iam." + region
-    management_url = "https://appid-management." + region + ".bluemix.net/management/v4/"
+    if not tgt_region:
+        tgt_region=region
 
+    if tgt_region == "us-south":
+        tgt_region = 'ng'
+
+    iam_url = "https://iam." + region
+    src_management_url = "https://appid-management." + region + ".bluemix.net/management/v4/"
+    tgt_management_url = "https://appid-management." + tgt_region + ".bluemix.net/management/v4/"
+    debug("source:" + src_management_url)
+    debug("target:" + tgt_management_url)
+    
     token = get_iam_token()
 
     copy("idps/facebook", token)
@@ -113,7 +124,7 @@ def main():
     copy("users_profile", token)
     # copy("ui/theme_color", token)
     # copy("ui/media", token)
-    copy("cloud_directory/sender_details", token)
+    # copy("cloud_directory/sender_details", token)
 
     copyTemplates(token)
     #copyActions(token)
