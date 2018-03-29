@@ -124,7 +124,7 @@ def main():
     copy("users_profile", token)
     # copy("ui/theme_color", token)
     # copy("ui/media", token)
-    copy("cloud_directory/sender_details", token)
+    # copy("cloud_directory/sender_details", token)
 
     copyTemplates(token)
     #copyActions(token)
