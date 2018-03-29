@@ -1,4 +1,4 @@
-# Cloning an App ID instance
+# Cloning an App ID instance configuration
 
 With App ID, you can now manage your service instance with an API!
 
@@ -35,7 +35,7 @@ In this blog, we will walk you through using a script to obtain an API-key, and 
 
 		>Tip: Be sure that you only give the service ID the rights to complete the tasks that you want it to. If you give too much, the ID has the ability to affect more than you intend. To learn more about App ID actions and roles, check out our doc on [service access management](https://console.bluemix.net/docs/iam/serviceidaccess.html#serviceidpolicy).
 
-3. In the target instance, assign another policy of `writer` for the same person.
+3. In the target instance, assign another policy of `writer` for the same service ID.
 
 
 ## Installing the cloning script
