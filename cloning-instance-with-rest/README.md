@@ -26,14 +26,15 @@ In this blog, we will walk you through using a script to obtain an API-key, and 
 
 2. Create an API-key for the service ID that you created previously. You'll need to pass this key to the DevOps person who operates the cloning task.
 
-		>Tip: For simplicity, this example shows how to clone an instance in the same account as the source. To clone to another account, you can create 2 service IDs and API-keys; one in your source account and the other in your target account. 
+    > Tip: For simplicity, this example shows how to clone an instance in the same account as the source. 
+    To clone to another account, you can create 2 service IDs and API-keys; one in your source account and the other in your target account. 
 
 
 ## Assigning access policies
 
 2. Create an access policy in the source instance by assigning the service ID the service role of `Reader`.
 
-		>Tip: Be sure that you only give the service ID the rights to complete the tasks that you want it to. If you give too much, the ID has the ability to affect more than you intend. To learn more about App ID actions and roles, check out our doc on [service access management](https://console.bluemix.net/docs/iam/serviceidaccess.html#serviceidpolicy).
+	> Tip: Be sure that you only give the service ID the rights to complete the tasks that you want it to. If you give too much, the ID has the ability to affect more than you intend. To learn more about App ID actions and roles, check out our doc on [service access management](https://console.bluemix.net/docs/iam/serviceidaccess.html#serviceidpolicy).
 
 3. In the target instance, assign another policy of `writer` for the same service ID.
 
@@ -58,7 +59,8 @@ Working with the CLI, complete the following steps.
 ## Running the cloning script
 
 1. Review the configurable parameters.
-2. Run the following command to start the script.
+2. Run the following command to start the script.  
+
 	```
 	appidc <source_id> <target_id> --apikey <api_key> --region <source_region> --target_region <target_region>
 	```
@@ -88,9 +90,10 @@ Working with the CLI, complete the following steps.
 		<td><i>target_region</i></td>
 		<td>The region that the instance of App ID that you want to copy the configuration to is located in. If not provided, it will default to the source region.</td>
 	</tr>
-</table>
+</table>  
 
-		>Tip: To see the REST messages, append the `-v` flag to the command.
+
+   > Tip: To see the REST messages, append the `-v` flag to the command.
 
 
 So, say you have App ID instance, x, that you have configured exactly as you want it but you need the same configuration in instance y. Both instances of the service are located in the IBM Cloud UK region. What would that command look like? Check out the following example.
