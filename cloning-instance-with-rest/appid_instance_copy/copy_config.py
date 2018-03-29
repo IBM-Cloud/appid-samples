@@ -76,7 +76,7 @@ def main():
     parser.add_argument('-R', '--target_region', type=str,
                         help='IBM Cloud region for source instance, if different then target')
 
-    parser.add_argument('-v', '--verbose', type=bool, default=False,
+    parser.add_argument('-v', '--verbose', action='store_true',
                         help='Run with verbose mode. REST messages content will be displayed')
 
     args = parser.parse_args()
