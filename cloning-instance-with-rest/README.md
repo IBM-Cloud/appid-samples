@@ -10,14 +10,14 @@ But, how do I do that while making sure I'm still giving the right people, the r
 
 Glad you asked.
 
-In this blog, we will walk you through using a script to obtain an API-key, and limited IAM credentials that you can use to access the App ID APIs. 
+In this blog, we will walk you through using a script to obtain an API-key, and limited Identity and Access Management (IAM) credentials that you can use to access the App ID APIs. 
 
 ## Prerequisites
 
-* You must be the owner of your IBM Cloud account.
+* You must be the owner of your IBM Cloud account, or have the appropriate IAM access policy in it, at least for App ID type resources. See this documentation for information about IAM access policies.
 * [Python](https://www.python.org/downloads/) must be installed. If you are working on a Mac or Linux machine, you may already have it installed. If not, you can use the provided link.
-* An App ID service instance that you have configured with the appropriate levels of access. From now on, we'll refer to this instance as the source instance.
-* A second App ID service instance in the same account. Going forward, this instance will be known as the target instance. 
+* An App ID service instance that you have Administrator level of access to. From now on, we'll refer to this instance as the source instance.
+* A second App ID service instance in the same account, which you have Administrator level of access to. Going forward, this instance will be known as the target instance. 
 
 
 ### Obtaining a service ID and API-key
