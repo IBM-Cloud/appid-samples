@@ -65,11 +65,8 @@ You should now have the CLIs installed, a lite cluster, and an image repository 
 	```
 	bx resource service-instance-create $APPID_INSTANCE_NAME appid graduated-tier $REGION
 	```
-5. *Optional*: Configure your App ID preferences. In the output of the following command, click on the Dashboard URL.
+5. *Optional*: Change App ID instance configuration from your [IBM Cloud console](https://console.bluemix.net/dashboard/apps/)
 
-	```
-	bx service show $APPID_INSTANCE_NAME
-	```
 6. Bind the instance of App ID that you created to your cluster.
 
 	```
@@ -81,7 +78,7 @@ You should now have the CLIs installed, a lite cluster, and an image repository 
     ```
     then go into the appid-liberty-docker folder
     ```
-    cd appid-liberty-docker
+    cd appid-samples/appid-liberty-docker
     ```
 8. Change directories so that you're in the folder in which you extracted the sample and run:
 
@@ -108,9 +105,11 @@ Optionally, prior to pushing the sample to Kubernetes, you might want to try out
 				
 	 **Pro tip**: This step eventually replaces the `APPID_AUTH_SERVER`, `APPID_CLIENT_ID`, `APPID_CLIENT_SECRET` and `APPID_AUTH_SERVER_ISSUER` values in your *Liberty/server.xml* with values that we append at runtime to the server *Liberty/bootstrap.properties* file. You can replace them manually, just don't pass the `--build-arg binding_secret=$BINDING` argument to the command below.
 
-2. Run the following command to build and run the image.
+2. You will now need to configure the OAuth redirect URL at the App ID dashboard. Go to your App ID instance at [IBM Cloud console](https://console.bluemix.net/dashboard/apps/)
+    and under Identity Providers->Manage->**Add web redirect URLs** add the following URL:
+    `https://localhost:443/oidcclient/redirect/MyRP`
 
-
+3. Run the following command to build and run the image.
 			APP_VERSION=1.1
 			docker rm appid_on_liberty
 			docker build -t $REGISTRY_DOMAIN/$REPOSITORY_NAMESPACE/appid-liberty:$APP_VERSION . --no-cache --build-arg binding_secret=$BINDING
@@ -149,7 +148,7 @@ You can use Kubernetes techniques in IBM Cloud Container Service to deploy apps 
 		```
 		binding-{{APPID_INSTANCE_NAME}}
 		```
-5. *Optional*: Change the value of metadate.namespace from default to your cluster namespace if you're using a different namespace.
+5. *Optional*: Change the value of metadata.namespace from default to your cluster namespace if you're using a different namespace.
 
 6. Build your Docker image. In an IBM Cloud Container Service *Lite* Cluster, we have to create the services with Node ports that have non standard http and https ports in the 30000-32767 range. In this example we chose http to be exposed at port 30080 and https at port 30081.
 7.
@@ -164,7 +163,11 @@ You can use Kubernetes techniques in IBM Cloud Container Service to deploy apps 
 	docker push $REGISTRY_DOMAIN/$REPOSITORY_NAMESPACE/appid-liberty:$APP_VERSION
 	kubectl apply -f appid-liberty-sample.yml
 	```
-8. Give the server a minute to get up and running and then you'll be able to see your sample running on Kubernetes in IBM Cloud.
+8. 	Now configure the OAuth redirect URL at the App ID dashboard so it will approve redirecting to your cluster. Go to your App ID instance at [IBM Cloud console](https://console.bluemix.net/dashboard/apps/)
+    and under Identity Providers->Manage->**Add web redirect URLs** add the following URL:
+    `https://$CLUSTER_IP:443/oidcclient/redirect/MyRP`
+
+9. Give the server a minute to get up and running and then you'll be able to see your sample running on Kubernetes in IBM Cloud.
 		```
 		open http://$CLUSTER_IP:30080/appidSample
 		```
