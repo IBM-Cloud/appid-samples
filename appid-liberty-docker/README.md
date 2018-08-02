@@ -62,14 +62,9 @@ You should now have the CLIs installed, a lite cluster, and an image repository 
 
 4. Create an instance of App ID.
 
-	<!--CF (this is what currently supported):-->
-	```
-	bx service create appid "Graduated tier" $APPID_INSTANCE_NAME
-	```
-	<!--RC (will start using this command once App ID is RC compatible in production):
 	```
 	bx resource service-instance-create $APPID_INSTANCE_NAME appid graduated-tier $REGION
-	``` -->
+	```
 5. *Optional*: Configure your App ID preferences. In the output of the following command, click on the Dashboard URL.
 
 	```
